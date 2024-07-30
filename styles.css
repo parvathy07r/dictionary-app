@@ -24,6 +24,9 @@ p {
 .result-section {
     border-top: 3px solid skyblue;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
 }
 
 input {
@@ -38,4 +41,28 @@ button {
     border-radius: 10px;
     background-color: skyblue;
     border: none;
+}
+
+.noun-section, .verb-section {
+    padding-top: 4px;
+    padding: 16px;
+}
+
+.verb-section {
+    border-top: 1px solid skyblue;
+}
+
+.word {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: skyblue;
+}
+
+.noun-display, .verb-display {
+    margin: 16px 0px 0px 16px;
 }
