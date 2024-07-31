@@ -36,7 +36,7 @@ input {
     border: 1px solid skyblue;
 }
 
-button {
+.search-section button {
     padding: 8px 15px;
     border-radius: 10px;
     background-color: skyblue;
@@ -47,10 +47,6 @@ button {
     padding-top: 4px;
     padding: 16px;
 }
-
-/* .verb-section {
-    border-top: 1px solid skyblue;
-} */
 
 .word {
     font-size: 32px;
@@ -66,3 +62,8 @@ button {
 .noun-display, .verb-display {
     margin: 16px 0px 0px 16px;
 }
+
+/* .display-phonetic {
+    border: 1px solid skyblue;
+    padding: 16px;
+} */

@@ -2,14 +2,15 @@
 const inputElement = document.querySelector("input");
 //select search button
 const searchButton = document.querySelector("button");
-//select result section
-const resultSection = document.querySelector(".result-section");
 //select section to display nouns 
 const nounSection = document.querySelector(".nouns");
 //select section to display verbs
 const verbSection = document.querySelector(".verbs");
 //select html element to display word
 const displayWord = document.querySelector(".word");
+//select html element to display phonetic
+const displayPhonetic = document.querySelector(".display-phonetic");
+const sound = document.getElementById("sound");
 
 //add eventlistener to the search button
 searchButton.addEventListener("click", (event) => {
@@ -25,6 +26,7 @@ searchButton.addEventListener("click", (event) => {
 
   nounSection.innerHTML = "";
   verbSection.innerHTML = "";
+  displayPhonetic.innerHTML = "";
 
   //make get request to the url
   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchQuery}`)
@@ -33,7 +35,20 @@ searchButton.addEventListener("click", (event) => {
     })
     .then((data) => {
       console.log(data);
+
+      const phoneticText = data[0].phonetics[0]
+
+      if (phoneticText) {
+        displayPhonetic.innerHTML += `
+        <span class="phonetic">${phoneticText.text}</span>
+        <button style="background-color:white; border:none; text-decoration: underline; cursor:pointer;" onClick="playSound('${phoneticText.audio}')">audio</button> 
+        `
+      } else {
+        displayPhonetic.innerHTML = "";
+      }
+
       data[0].meanings.forEach((meaning) => {
+
         if (meaning.partOfSpeech === 'noun') {
           nounSection.innerHTML += `
                 <div class="noun-display">
@@ -66,4 +81,8 @@ searchButton.addEventListener("click", (event) => {
     });
 });
 
+function playSound(audio) {
+  sound.src = audio;
+  sound.play();
+}
 
