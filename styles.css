@@ -48,12 +48,12 @@ button {
     padding: 16px;
 }
 
-.verb-section {
+/* .verb-section {
     border-top: 1px solid skyblue;
-}
+} */
 
 .word {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
 }
 
