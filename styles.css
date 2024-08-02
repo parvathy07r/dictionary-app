@@ -43,7 +43,7 @@ form button {
     border: none;
 }
 
-.noun-section, .verb-section {
+.meaning-section {
     padding-top: 4px;
     padding: 16px;
 }
@@ -51,19 +51,15 @@ form button {
 .word {
     font-size: 32px;
     font-weight: bold;
+    padding: 8px;
+}
+
+.display-phonetic {
+    padding: 8px;
 }
 
 .heading {
     font-size: 24px;
     font-weight: bold;
-    background-color: skyblue;
 }
 
-.noun-display, .verb-display {
-    margin: 16px 0px 0px 16px;
-}
-
-/* .display-phonetic {
-    border: 1px solid skyblue;
-    padding: 16px;
-} */
