@@ -30,7 +30,7 @@ formData.addEventListener("submit", (event) => {
       }
       data[0].meanings.forEach((meaning) => {
         meaningSection.innerHTML += `
-          <span class="heading">${meaning.partOfSpeech}</span>
+          <span class="heading">${capitalize(meaning.partOfSpeech)}</span>
           <ol>
             ${meaning.definitions.map((definition) =>
               `<li>${definition.definition}</li>`
@@ -48,3 +48,6 @@ function playSound(audio) {
   sound.play();
 }
 
+function capitalize(word) {
+  return word.slice(0, 1).toUpperCase() + word.slice(1);
+}
