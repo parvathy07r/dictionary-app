@@ -4,6 +4,9 @@ const displayPhonetic = document.querySelector(".display-phonetic");
 const sound = document.getElementById("sound");
 const meaningSection = document.querySelector(".meaning-section");
 
+/**
+ * form submission handler 
+*/
 formData.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -15,7 +18,7 @@ formData.addEventListener("submit", (event) => {
   displayPhonetic.innerHTML = "";
 
   displayWord.innerHTML += `<span class="word">${word}</span>`;
-
+  
   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
     .then((response) => {
       return response.json();
@@ -23,11 +26,18 @@ formData.addEventListener("submit", (event) => {
     .then((data) => {
       const phoneticText = data[0].phonetics[0]
 
+      /**
+       * to display the phonetic text and audio of the word if present 
+      */
       if (phoneticText) {
         displayPhonetic.innerHTML += `
           <span class="phonetic">${phoneticText.text}</span>
           <button class="audio-button" onClick="playSound('${phoneticText.audio}')">audio</button> `
       }
+
+      /**
+       * iterate over the meanings and display each part of speech and its definitions
+      */
       data[0].meanings.forEach((meaning) => {
         meaningSection.innerHTML += `
           <span class="heading">${capitalize(meaning.partOfSpeech)}</span>
@@ -48,6 +58,9 @@ function playSound(audio) {
   sound.play();
 }
 
+/**
+ * description: function to capitalize the first letter of a word 
+*/
 function capitalize(word) {
   return word.slice(0, 1).toUpperCase() + word.slice(1);
 }
