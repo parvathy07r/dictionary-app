@@ -63,3 +63,9 @@ form button {
     font-weight: bold;
 }
 
+.audio-button {
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -26,7 +26,7 @@ formData.addEventListener("submit", (event) => {
       if (phoneticText) {
         displayPhonetic.innerHTML += `
           <span class="phonetic">${phoneticText.text}</span>
-          <button style="background-color:white; border:none; text-decoration: underline; cursor:pointer;" onClick="playSound('${phoneticText.audio}')">audio</button> `
+          <button class="audio-button" onClick="playSound('${phoneticText.audio}')">audio</button> `
       }
       data[0].meanings.forEach((meaning) => {
         meaningSection.innerHTML += `
