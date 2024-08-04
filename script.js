@@ -16,14 +16,13 @@ formData.addEventListener("submit", (event) => {
   displayWord.innerHTML = "";
   meaningSection.innerHTML = "";
   displayPhonetic.innerHTML = "";
-
-  displayWord.innerHTML += `<span class="word">${word}</span>`;
   
   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
+      displayWord.innerHTML += `<span class="word">${word}</span>`;
       const phoneticText = data[0].phonetics[0]
 
       /**
@@ -36,7 +35,7 @@ formData.addEventListener("submit", (event) => {
       }
 
       /**
-       * iterate over the meanings and display each part of speech and its definitions
+       * display each part of speech and its definitions
       */
       data[0].meanings.forEach((meaning) => {
         meaningSection.innerHTML += `
