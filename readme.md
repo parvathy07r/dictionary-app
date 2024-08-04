@@ -1,2 +1,2 @@
 # whatIsIt
-Deployment - https://parvathy07r.github.io/dictionary-app/
+Deployment - https://parvathy07r.github.io/whatIsIt/
