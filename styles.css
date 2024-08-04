@@ -36,33 +36,36 @@ input {
     border: 1px solid skyblue;
 }
 
-button {
+form button {
     padding: 8px 15px;
     border-radius: 10px;
     background-color: skyblue;
     border: none;
 }
 
-.noun-section, .verb-section {
+.meaning-section {
     padding-top: 4px;
     padding: 16px;
 }
 
-.verb-section {
-    border-top: 1px solid skyblue;
+.word {
+    font-size: 32px;
+    font-weight: bold;
+    padding: 8px;
 }
 
-.word {
-    font-size: 24px;
-    font-weight: bold;
+.display-phonetic {
+    padding: 8px;
 }
 
 .heading {
     font-size: 24px;
     font-weight: bold;
-    background-color: skyblue;
 }
 
-.noun-display, .verb-display {
-    margin: 16px 0px 0px 16px;
+.audio-button {
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
 }

@@ -9,19 +9,15 @@
 <body>
     <div class="wrapper">
         <div class="container">
-            <div class="search-section">
-                <input type="text">
+            <audio id="sound" src=""></audio>
+            <form id="form_data">
+                <input type="text" name="word">
                 <button>Search</button>
             </div>
             <div class="result-section">
-                <div class="noun-section">
-                    <span class="heading">Nouns</span>
-                    <div class="nouns"></div>
-                </div>
-                <div class="verb-section">
-                    <span class="heading">Verbs</span>
-                    <div class="verbs"></div>
-                </div>
+                <div class="word"></div>
+                <div class="display-phonetic"></div>
+                <div class="meaning-section"></div>
             </div>
         </div>
     </div>

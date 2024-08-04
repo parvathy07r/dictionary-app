@@ -1,71 +1,65 @@
-//select input element
-const inputElement = document.querySelector("input");
-//select search button
-const searchButton = document.querySelector("button");
-//select result section
-const resultSection = document.querySelector(".result-section");
-//select section to display nouns 
-const nounSection = document.querySelector(".nouns");
-//select section to display verbs
-const verbSection = document.querySelector(".verbs");
+const formData = document.querySelector("form");
+const displayWord = document.querySelector(".word");
+const displayPhonetic = document.querySelector(".display-phonetic");
+const sound = document.getElementById("sound");
+const meaningSection = document.querySelector(".meaning-section");
 
-//add eventlistener to the search button
-searchButton.addEventListener("click", (event) => {
-    console.log(inputElement.value);
+/**
+ * form submission handler 
+*/
+formData.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-    //extract input value and store it 
-    const searchQuery = inputElement.value;
+  const form = event.target;
+  const word = form["word"].value;
 
-    nounSection.innerHTML = "";
-    verbSection.innerHTML = "";
+  displayWord.innerHTML = "";
+  meaningSection.innerHTML = "";
+  displayPhonetic.innerHTML = "";
+  
+  fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      displayWord.innerHTML += `<span class="word">${word}</span>`;
+      const phoneticText = data[0].phonetics[0]
 
-    //make get request to the url
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchQuery}`)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-            data[0].meanings.forEach((meaning) => {
-                if (meaning.partOfSpeech === 'noun') {
-                    nounSection.innerHTML += `
-                <div class="noun-display">
-                        <span class="word">${searchQuery}</span>
-                        <ol>
-                            ${meaning.definitions.map((definition) =>
-                        `<li>${definition.definition}</li>`
-                    ).join('')}
-                        </ol>
-                </div>
-                `
+      /**
+       * to display the phonetic text and audio of the word if present 
+      */
+      if (phoneticText) {
+        displayPhonetic.innerHTML += `
+          <span class="phonetic">${phoneticText.text}</span>
+          <button class="audio-button" onClick="playSound('${phoneticText.audio}')">audio</button> `
+      }
 
-                }
-
-                if (meaning.partOfSpeech === 'verb') {
-                    verbSection.innerHTML += `
-                <div class="verb-display">
-                        <span class="word">${searchQuery}</span>
-                        <ol>
-                            ${meaning.definitions.map((definition) =>
-                        `<li>${definition.definition}</li>`
-                    ).join('')}
-                        </ol>
-                </div>
-                `
-                }
-
-
-
-
-
-
-            })
-
-
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+      /**
+       * display each part of speech and its definitions
+      */
+      data[0].meanings.forEach((meaning) => {
+        meaningSection.innerHTML += `
+          <span class="heading">${capitalize(meaning.partOfSpeech)}</span>
+          <ol>
+            ${meaning.definitions.map((definition) =>
+              `<li>${definition.definition}</li>`
+            ).join('')}
+          </ol>`
+      })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
+function playSound(audio) {
+  sound.src = audio;
+  sound.play();
+}
 
+/**
+ * description: function to capitalize the first letter of a word 
+*/
+function capitalize(word) {
+  return word.slice(0, 1).toUpperCase() + word.slice(1);
+}
